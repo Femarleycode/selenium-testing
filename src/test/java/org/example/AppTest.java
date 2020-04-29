@@ -13,6 +13,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -59,10 +60,37 @@ public class AppTest
        assertTrue(imagesLink.isDisplayed());
    }
 
+   @Test
+   public void seleniumDrawHouse() throws InterruptedException{
+        driver.manage().window().maximize();
+        sleep( 2000);
+        driver.get("https://www.youidraw.com/apps/painter/");
+        sleep ( 2000);
+
+        Actions action = new Actions(driver);
+        sleep( 2000);
+
+       //draws house
+       action.moveByOffset( 600, 400).clickAndHold().moveByOffset( 400, 0).perform();
+       sleep( 2000);
+       action.moveByOffset( 0, 300).perform();
+       sleep( 2000);
+       action.moveByOffset( -400, 0).perform();
+       sleep( 2000);
+       action.moveByOffset( 0, -300).perform();
+       sleep( 2000);
+       action.moveByOffset( 150, -150).perform();
+       sleep( 2000);
+       action.moveByOffset( 150, 150).perform();
+       sleep( 2000);
+
+       action.release().perform();
+       sleep( 3000);
+   }
+
+
    @After
    public void tearDown(){
        driver.close();
    }
 }
-
-//    List<WebElement> listOfPTags = driver.findElements(By.tagName("p"));
