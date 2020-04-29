@@ -15,11 +15,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class AppTest 
 {
@@ -111,6 +115,21 @@ public class AppTest
                .until(ExpectedConditions.presenceOfElementLocated(By.name("q")));
    }
 
+   @Test
+   public void fluentWaitExample(){
+       driver.get(driver.get("http://www.google.com");
+       Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+               .withTimeout(30, SECONDS)
+               .pollingEvery(5, SECONDS)
+               .ignoring(NoSuchElementExeption.class);
+       WebElement searchBar = wait.until(new Function<WebDriver, WebElement>(){
+           @Override
+           public WebElement apply(WebDriver webDriver){
+               return driver.findElement(By.name("q"));
+           }
+       });
+               assertTrue(searchBar.isDisplayed());
+   }
 
    @After
    public void tearDown(){
