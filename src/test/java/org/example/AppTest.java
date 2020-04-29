@@ -14,8 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class AppTest 
 {
@@ -86,6 +90,25 @@ public class AppTest
 
        action.release().perform();
        sleep( 3000);
+   }
+
+    //Waiting for page to show elements
+   @Test
+   //bad way of doing it, it will only look for the element after a set period, poentially wasting time
+   public void implicitWaitExample(){
+       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+       driver.manage().window().maximize();
+       driver.get("http://www.google.com");
+       WebElement searchBar = driver.findElement(By.name("q"));
+       assertTrue(searchBar.isDisplayed());
+   }
+
+   @Test
+   //better way of doing it, because if it finds the method, it stops waiting, wasting less time
+   public void explicitWaitExample(){
+       driver.get("http://www.google.com");
+       WebElement searchBar = (new WebDriverWait(driver, 10))
+               .until(ExpectedConditions.presenceOfElementLocated(By.name("q")));
    }
 
 
