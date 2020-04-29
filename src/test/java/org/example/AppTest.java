@@ -120,7 +120,7 @@ public class AppTest
     //fluid is more customisable, specify how often you look for the element and if you want to ignore any exceptions.
     public void fluentWaitExample(){
         driver.get("http://www.google.com");
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(30, SECONDS)
                 .pollingEvery(5, SECONDS)
                 .ignoring(NoSuchElementException.class);
@@ -138,38 +138,52 @@ public class AppTest
     public void loginWebsite() throws InterruptedException {
         driver.get("http://automationpractice.com/index.php");
         //wait until expected element appears
-
-        //WebElement searchBar = (new WebDriverWait(driver, 10))
-                //.until(ExpectedConditions.presenceOfElementLocated(By.name("search_query")));
+        sleep( 300);
 
         //some sort of assertion to prove on homepage
         //Assert.assertEquals(driver.getCurrentUrl().contains("search_query"));
 
+        //login page
+        WebElement login = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#header > div.nav > div > div > nav > div.header_user_info > a")));
+        login.click();
         sleep( 300);
 
-        // attempt 1
-//        action.doubleClick((WebElement) By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
-        // attempt 2
-//        driver.findElement(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
-        // attempt 3
-//        WebElement dressesPage = driver.findElement(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
-//        dressesPage.click();
-//        sleep( 1000);
-        // attempt 4
-//        WebElement dressesPage = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]")));
-        // 5
-        // WebElement dressesPage = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText("Dresses")));
-        // 6
-        WebElement dressesPage = driver.findElement(By.partialLinkText("DRESSES"));
-        dressesPage.click();
+        //click email
+        WebElement emailBox = driver.findElement(By.id("email"));
+        emailBox.click();
+        sleep( 300);
+        emailBox.sendKeys( "femarleycode@gmail.com");
+        sleep(  300);
+        //emailBox.submit();
+
+        //click password
+        WebElement passBox = driver.findElement(By.id("passwd"));
+        passBox.click();
+        sleep( 300);
+        passBox.sendKeys( "securepass#9");
+        sleep(  300);
+        //passBox.submit();
+
+        //click sign in
+        WebElement clickSignIn = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("SubmitLogin")));
+        clickSignIn.click();
         sleep( 300);
 
-//        WebElement  = driver.findElement(By.partialLinkText("DRESSES"));
+
+//DRESSES PAGE
+//        WebElement dressesPage = driver.findElement(By.partialLinkText("DRESSES"));
 //        dressesPage.click();
 //        sleep( 300);
 
+
 //      dress check
 //        assertTrue(driver.getTitle().contains("printed dress"));
+
+
+        //femarleycode@gmail.com
+        //"securepass#9"
+
+        sleep ( 10000);
     }
 
    @After
