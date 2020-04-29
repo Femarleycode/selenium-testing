@@ -133,7 +133,44 @@ public class AppTest
         assertTrue(searchBar.isDisplayed());
     }
 
+    @Test
+    //login test
+    public void loginWebsite() throws InterruptedException {
+        driver.get("http://automationpractice.com/index.php");
+        //wait until expected element appears
 
+        //WebElement searchBar = (new WebDriverWait(driver, 10))
+                //.until(ExpectedConditions.presenceOfElementLocated(By.name("search_query")));
+
+        //some sort of assertion to prove on homepage
+        //Assert.assertEquals(driver.getCurrentUrl().contains("search_query"));
+
+        sleep( 300);
+
+        // attempt 1
+//        action.doubleClick((WebElement) By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
+        // attempt 2
+//        driver.findElement(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
+        // attempt 3
+//        WebElement dressesPage = driver.findElement(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]"));
+//        dressesPage.click();
+//        sleep( 1000);
+        // attempt 4
+//        WebElement dressesPage = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("xpath=(//a[contains(text(),'Dresses')])[5]")));
+        // 5
+        // WebElement dressesPage = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText("Dresses")));
+        // 6
+        WebElement dressesPage = driver.findElement(By.partialLinkText("DRESSES"));
+        dressesPage.click();
+        sleep( 300);
+
+//        WebElement  = driver.findElement(By.partialLinkText("DRESSES"));
+//        dressesPage.click();
+//        sleep( 300);
+
+//      dress check
+//        assertTrue(driver.getTitle().contains("printed dress"));
+    }
 
    @After
    public void tearDown(){
