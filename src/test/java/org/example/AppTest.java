@@ -9,9 +9,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
 
 public class AppTest 
 {
@@ -40,8 +43,23 @@ public class AppTest
        assertTrue(imagesLink.isDisplayed());
    }
 
+   @Test
+   public void seleniumExampleSendingMultipleKeyboardKeysTest() throws InterruptedException{
+       driver.manage().window().maximize();
+       sleep( 2000);
+       driver.get("http://www.google.com");
+       sleep( 1000);
+       WebElement googleSearchBar = driver.findElement(By.name("q"));
+       googleSearchBar.sendKeys(Keys.chord("funny ", "dog ", "pics", Keys.ENTER));
+       sleep(1000);
+       WebElement imagesLink = driver.findElement(By.className("NZmxZe"));
+       assertTrue(imagesLink.isDisplayed());
+   }
+
    @After
    public void tearDown(){
        driver.close();
    }
 }
+
+//    List<WebElement> listOfPTags = driver.findElements(By.tagName("p"));
