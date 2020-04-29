@@ -52,6 +52,9 @@ public class AppTest
        WebElement googleSearchBar = driver.findElement(By.name("q"));
        googleSearchBar.sendKeys(Keys.chord("funny ", "dog ", "pics", Keys.ENTER));
        sleep(1000);
+       WebElement linkToPictures = driver.findElement(By.partialLinkText("Images for funny dog"));
+       linkToPictures.click();
+       sleep( 1000);
        WebElement imagesLink = driver.findElement(By.className("NZmxZe"));
        assertTrue(imagesLink.isDisplayed());
    }
