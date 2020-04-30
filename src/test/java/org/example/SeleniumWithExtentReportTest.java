@@ -22,6 +22,7 @@ public class SeleniumWithExtentReportTest {
     ExtentReports report;
     ExtentTest test;
 
+    // Find where project is located, create new directory for storing reports
     @BeforeTest
     public void startReport(){
         report = new ExtentReports(
@@ -30,7 +31,7 @@ public class SeleniumWithExtentReportTest {
         );
         report
                 .addSystemInfo("Host Name", "QA")
-                .addSystemInfo("Tester", "Tadas");
+                .addSystemInfo("Tester", "Felix");
         report.loadConfig(new File(System.getProperty("user.dir") + "\\extent-report.xml"));
     }
 
@@ -39,6 +40,7 @@ public class SeleniumWithExtentReportTest {
         driver = new ChromeDriver();
     }
 
+    // Basic test for initializing the report, adding comments throughout the test
     @Test
     public void testQATitle(){
         test = report.startTest("Verifying the title of QA website");
@@ -50,6 +52,7 @@ public class SeleniumWithExtentReportTest {
         test.log(LogStatus.PASS, "The title was exactly the same");
     }
 
+    // How to take a screenshot adn add to test report
     @Test
     public void takeScreenShow() throws IOException {
         test = report.startTest("Checking QA website logo is displayed");
@@ -64,6 +67,7 @@ public class SeleniumWithExtentReportTest {
         test.log(LogStatus.PASS, "The logo was present", "<img src=logoPage.jpg>");
     }
 
+    // How to execute JavaScript using web driver example
     @Test
     public void jsExample() throws InterruptedException {
         test = report.startTest("Starting JS example test");
@@ -80,6 +84,44 @@ public class SeleniumWithExtentReportTest {
             System.out.println("Can't execute JS");
         }
     }
+
+
+    // Mercury Tours Website
+    @Test
+    public void mercuryToursWebsite() throws InterruptedException {
+        test = report.startTest("reg acc");
+        driver.manage().window().maximize();
+        test.log(LogStatus.INFO, "Started chrome browser and made it fullscreen");
+        driver.get("http://www.newtours.demoaut.com/");
+        test.log(LogStatus.INFO, "Navigating to the Mercury Tours website");
+        if (driver instanceof JavascriptExecutor){
+            ((JavascriptExecutor) driver).executeScript("alert('Hello Everybody')");
+            sleep(2000);
+            driver.switchTo().alert().accept();
+            sleep(2000);
+        } else {
+            System.out.println("Can't execute JS");
+        }
+    }
+
+//    @Test
+//    public void mercuryToursWebsiteRegAcc() throws InterruptedException {
+//        test = report.startTest("reg acc");
+//        driver.manage().window().maximize();
+//        test.log(LogStatus.INFO, "Started chrome browser and made it fullscreen");
+//        driver.get("http://www.newtours.demoaut.com/");
+//        test.log(LogStatus.INFO, "Navigating to the Mercury Tours website");
+//        if (driver instanceof JavascriptExecutor){
+//            ((JavascriptExecutor) driver).executeScript("alert('Hello Everybody')");
+//            sleep(2000);
+//            driver.switchTo().alert().accept();
+//            sleep(2000);
+//        } else {
+//            System.out.println("Can't execute JS");
+//        }
+//    }
+
+
 
 
     @AfterMethod
