@@ -9,10 +9,7 @@ import com.google.common.base.Function;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -133,8 +130,9 @@ public class AppTest
         assertTrue(searchBar.isDisplayed());
     }
 
+
     @Test
-    //login test
+    //login and shop test
     public void loginWebsite() throws InterruptedException {
         driver.get("http://automationpractice.com/index.php");
         //wait until expected element appears
@@ -143,38 +141,90 @@ public class AppTest
         //some sort of assertion to prove on homepage
         //Assert.assertEquals(driver.getCurrentUrl().contains("search_query"));
 
-        //login page
-        WebElement login = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#header > div.nav > div > div > nav > div.header_user_info > a")));
-        login.click();
+//        //login page
+//        WebElement login = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#header > div.nav > div > div > nav > div.header_user_info > a")));
+//        login.click();
+//        sleep( 300);
+
+//        //click email
+//        WebElement emailBox = driver.findElement(By.id("email"));
+//        emailBox.click();
+//        sleep( 300);
+//        //enter email
+//        emailBox.sendKeys( "femarleycode@gmail.com");
+//        sleep(  300);
+//        //emailBox.submit();
+
+//        //click password
+//        WebElement passBox = driver.findElement(By.id("passwd"));
+//        passBox.click();
+//        sleep( 300);
+//        //enter pass
+//        passBox.sendKeys( "securepass#9");
+//        sleep(  300);
+//        //passBox.submit();
+
+//        //click sign in
+//        WebElement clickSignIn = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("SubmitLogin")));
+//        clickSignIn.click();
+//        sleep( 300);
+
+        //DRESSES PAGE
+        WebElement dressesPage = driver.findElement(By.partialLinkText("DRESSES"));
+        dressesPage.click();
         sleep( 300);
 
-        //click email
-        WebElement emailBox = driver.findElement(By.id("email"));
-        emailBox.click();
-        sleep( 300);
-        emailBox.sendKeys( "femarleycode@gmail.com");
-        sleep(  300);
-        //emailBox.submit();
-
-        //click password
-        WebElement passBox = driver.findElement(By.id("passwd"));
-        passBox.click();
-        sleep( 300);
-        passBox.sendKeys( "securepass#9");
-        sleep(  300);
-        //passBox.submit();
-
-        //click sign in
-        WebElement clickSignIn = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("SubmitLogin")));
-        clickSignIn.click();
-        sleep( 300);
-
-
-//DRESSES PAGE
-//        WebElement dressesPage = driver.findElement(By.partialLinkText("DRESSES"));
+        //printed dress click
+//        WebElement pDress = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/div[2]/a[1]/span")));
 //        dressesPage.click();
 //        sleep( 300);
 
+        sleep(1000);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500)");
+        sleep( 500);
+
+        WebElement dressCasual = driver.findElement(By.partialLinkText("Printed Dress"));
+        dressCasual.click();
+        sleep( 500);
+
+        WebElement submit = driver.findElement(By.name("Submit"));
+        submit.click();
+        sleep( 500);
+
+        WebElement toCheckout = (new WebDriverWait(driver, 5))
+                .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText("Proceed to checkout")));
+        toCheckout.click();
+        sleep( 500);
+
+        WebElement proceedTo = driver.findElement(By.partialLinkText("Proceed to checkout"));
+        proceedTo.click();
+        sleep( 500);
+
+        WebElement emailInput = driver.findElement(By.name("email_create"));
+        int rand = (int)(Math.random() * 10);
+        emailInput.sendKeys("yoursin" + rand + "@test.com");
+        sleep( 500);
+
+        WebElement createAccount = driver.findElement(By.id("SubmitCreate"));
+        createAccount.click();
+        sleep( 500);
+
+        sleep(5000);
+
+        WebElement genderMale = driver.findElement(By.id("id_gender1"));
+        genderMale.click();
+        sleep( 500);
+
+        WebElement firstName = driver.findElement(By.id("customer_firstname"));
+        firstName.sendKeys("Yabba");
+        sleep( 500);
+
+        WebElement lastName = driver.findElement(By.id("customer_lastname"));
+        lastName.sendKeys("Yobbo");
+
+        WebElement password = driver.findElement(By.id("passwd"));
+        password.sendKeys("qwertyuiop");
 
 //      dress check
 //        assertTrue(driver.getTitle().contains("printed dress"));
